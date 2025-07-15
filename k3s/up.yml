@@ -2,6 +2,11 @@
   ansible.builtin.shell: curl -sfL https://get.k3s.io | sh -s - --disable traefik --write-kubeconfig-mode 644
   args:
     creates: /etc/rancher/k3s/k3s.yaml
+    warn: false
+- name: Create .kube directory if it does not exist
+  ansible.builtin.file:
+    path: ~/.kube/
+    state: directory
 - name: copy kubeconfig
   ansible.builtin.shell: cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
   args:
