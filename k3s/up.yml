@@ -2,7 +2,6 @@
   ansible.builtin.shell: curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
   args:
     creates: /etc/rancher/k3s/k3s.yaml
-    warn: false
 - name: Create .kube directory if it does not exist
   ansible.builtin.file:
     path: ~/.kube/
