@@ -1,5 +1,5 @@
 - name: create k3s
-  ansible.builtin.shell: curl -sfL https://get.k3s.io | sh -s - --disable traefik --write-kubeconfig-mode 644
+  ansible.builtin.shell: curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
   args:
     creates: /etc/rancher/k3s/k3s.yaml
     warn: false
