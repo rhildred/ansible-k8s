@@ -6,19 +6,6 @@
   ansible.builtin.command: bash /tmp/installk3d.sh
   args:
     creates: /usr/local/bin/k3d
-- name: download helm
-  ansible.builtin.command: curl -o /tmp/installhelm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-  args:
-    creates: /tmp/installhelm.sh
-- name: install helm
-  ansible.builtin.command: bash /tmp/installhelm.sh
-  args:
-    creates: /usr/local/bin/helm
-- name: change permissions on helm
-  become: true
-  ansible.builtin.file:
-    path: /usr/local/bin/helm
-    mode: o=x  
 - name: download kubectl
   ansible.builtin.command: curl -Lo /tmp/installkubectl https://dl.k8s.io/release/v1.31.0/bin/linux/amd64/kubectl
   args:

@@ -7,6 +7,21 @@
       k8s: "{{ lookup('ansible.builtin.env', 'K8S') | default('k3s', True) }}"
   - name: run k8s variant
     ansible.builtin.include_tasks: "{{ k8s }}/up.yml"
+
+  - name: download helm
+    ansible.builtin.command: curl -o /tmp/installhelm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+    args:
+      creates: /tmp/installhelm.sh
+  - name: install helm
+    ansible.builtin.command: bash /tmp/installhelm.sh
+    args:
+      creates: /usr/local/bin/helm
+  - name: change permissions on helm
+    become: true
+    ansible.builtin.file:
+      path: /usr/local/bin/helm
+      mode: o=x  
+
   - name: Add ingress-nginx chart repo
     kubernetes.core.helm_repository:
       name: ingress-nginx
