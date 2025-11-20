@@ -15,6 +15,6 @@
   args:
     creates: /usr/local/bin/kubectl
 - name: create cluster
-  ansible.builtin.command: k3d cluster create local-k8s --k3s-arg "--disable=traefik@server:*"
+  ansible.builtin.command: k3d cluster create local-k8s -p "80:80@loadbalancer" --k3s-arg "--disable=traefik@server:*"
   args:
     creates: ~/.kube/config
